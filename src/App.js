@@ -42,6 +42,12 @@ class App extends React.Component {
       url: urlString,
       success: (searchResults) =>{
         console.log("Fecthed data successfully")
+        // console.log(searchResults)
+        const results = searchResults.results
+        // console.log(results[0])
+        results.map((movie)=>{
+          console.log(movie.title)
+        })
       },
       error(xhr, status, err)  {
         console.error("Failed to fetch data")
