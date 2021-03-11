@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   searchChangeHandler(event){
-    console.log(event.target.value)
+    // console.log(event.target.value)
     const boundObject = this
     const searchTerm = event.target.value
     boundObject.performSearch(searchTerm)
