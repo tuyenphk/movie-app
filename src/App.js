@@ -32,7 +32,7 @@ class App extends React.Component {
     // })
 
     // this.state={rows: movieRows}
-    this.performSearch("ant man");
+    this.performSearch("avengers");
   }
 
   performSearch(searchTerm){
@@ -89,6 +89,7 @@ class App extends React.Component {
         </table>
 
         <input onChange={this.searchChangeHandler.bind(this)} placeholder="Enter search movie..." className="input-movie"/>
+        &nbsp;
         {this.state.rows}
       </div>
     );
