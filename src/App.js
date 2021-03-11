@@ -45,9 +45,15 @@ class App extends React.Component {
         // console.log(searchResults)
         const results = searchResults.results
         // console.log(results[0])
+        var movieRows = []
+
         results.map((movie)=>{
-          console.log(movie.title)
+          movie.poster_src = "https://image.tmdb.org/t/p/w185" + movie.poster_path
+          console.log(movie.poster_path)
+          const movieRow = <MovieRow movie={movie} />
+          movieRows.push(movieRow)        
         })
+        this.setState({rows: movieRows})
       },
       error(xhr, status, err)  {
         console.error("Failed to fetch data")
