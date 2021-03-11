@@ -32,12 +32,12 @@ class App extends React.Component {
     // })
 
     // this.state={rows: movieRows}
-    this.performSearch();
+    this.performSearch("ant man");
   }
 
-  performSearch(){
+  performSearch(searchTerm){
     console.log("Perform search here...")
-    const urlString="https://api.themoviedb.org/3/search/movie?query=marvel&api_key=1b5adf76a72a13bad99b8fc0c68cb085"
+    const urlString="https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=" + searchTerm
     $.ajax({
       url: urlString,
       success: (searchResults) =>{
@@ -49,8 +49,8 @@ class App extends React.Component {
 
         results.map((movie)=>{
           movie.poster_src = "https://image.tmdb.org/t/p/w185" + movie.poster_path
-          console.log(movie.poster_path)
-          const movieRow = <MovieRow movie={movie} />
+          // console.log(movie.poster_path)
+          const movieRow = <MovieRow key={movie.id} movie={movie} />
           movieRows.push(movieRow)        
         })
         this.setState({rows: movieRows})
@@ -59,6 +59,13 @@ class App extends React.Component {
         console.error("Failed to fetch data")
       }
     })
+  }
+
+  searchChangeHandler(event){
+    console.log(event.target.value)
+    const boundObject = this
+    const searchTerm = event.target.value
+    boundObject.performSearch(searchTerm)
   }
 
   render(){
@@ -81,7 +88,7 @@ class App extends React.Component {
           </tbody>
         </table>
 
-        <input placeholder="Enter search movie..." className="input-movie"/>
+        <input onChange={this.searchChangeHandler.bind(this)} placeholder="Enter search movie..." className="input-movie"/>
         {this.state.rows}
       </div>
     );
